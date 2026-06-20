@@ -35,10 +35,12 @@ Como se puede ver en los datos, existen diferentes capacidades de victoria depen
 
 ### Comparativa de equipos con una alta participación en la primera liga de España
 > Nota: Para la elección de los equipos se buscó por internet cuáles son los equipos que han tenido mayor presencia a lo largo de estos 30 años, dando como resultado los 5 equipos elegidos.
+> 
 Dado lo visto previamente, se denota que equipos como el Barcelona o Real Madrid tienen un desbalance estadístico masivo a su favor. Este sesgo es algo a tener en cuenta más adelante, cuando se trabaje en la etapa de modelado predictivo, ya que podría influir en que el modelo tienda a favorecer siempre a estos equipos cuando juegan de local.
 
 ### Mapa de calor de algunos equipos de la Liga
 > Nota: Nuevamente se utilizó la búsqueda en internet para seleccionar estos equipos.
+> 
 Como se puede analizar, efectivamente existen equipos que pueden presentar una "dominancia" respecto de otros equipos. Esto, como ya se indicó previamente, podría ocurrir por cuestiones más relacionadas al presupuesto o calidad de la plantilla, pero es importante que el modelo predictivo que se pretende crear tenga en cuenta dichas ventajas para no subestimar (o sobreestimar) ciertos equipos.
 
 ### Conclusiones iniciales
