@@ -11,9 +11,20 @@ En el fútbol profesional, el análisis de datos pre-partido es una práctica co
 El dataset fue encontrado en Kaggle, nombrado como *European Football Matches* de Aiden Flynn. Dado que la base de datos estaba dividida en distintas hojas de calculo, cada una de una liga distinta se dió preferencia a la primera liga de España (La Liga). Dicha base corresponde a todos los partidos disputados desde el año 1993 hasta el año 2023, en donde sus variables principales se observa la fecha de ocurrido el encuentro (Date), los equipos involucrados diferenciados del equipo local (HomeTeam) y el equipo visitante (AwayTeam), los goles marcados por cada uno (HomeGoals y AwayGoals), y por último una variable que categoriza el resultado final del partido, que indica si el equipo local ganó (H), si el visitante ganó (A), o si hubo un empate (D).
 La última variable descrita será utilizada como la variable objetivo.
 
+## Plan de acción
+Para evaluar como se desempeña el modelo en la predicción, se hará una división temporal de los datos, de manera que el modelo utilice las temporadas pasadas como entrenamiento y intente predecir lo que ocurre en las temporadas más recientes. De esta forma, el modelo simula una interacción real, dado que la predicción se basará en la información que se tiene en el momento para predecir un resultado futuro.
+
+El problema observado es de clasificación multiclase (la variable objertivo cuenta con las opciones victoria, derrota, empate), además que dichas clases no están balanceadas (en general los equipos ganan mas de local). Por lo tanto, se implementará la lectura del accuracy, precision, recall, F1-score y matriz de confusion.
+
 ## Justificación del modelo
-Se prevé el uso de regresión logística y random forest para la aplicación de este modelo.
-La primera será utilizada dado que se puede establecer un rendimiento alto sin correr el riesgo del sobreajuste, además de que permitirá idenificar correctamente si es que existe peso estadístico a la hora de jugar de local o por un equipo en específico. El segundo modelo a aplicar se elige para la captura de patrones específicos en líneas complejas (como por ejemplo, que un equipo tiende a ganar más específicamente cuando juega de local o cuando juega de visita con cierto equipo), por lo demás, también es un buen modelo para evitar el sobreajuste.
+Como se comentó, existe un posible problema de overfitting, por lo qué se prevé el uso de regresión logística y random forest para la aplicación de este modelo. 
+
+La primera será utilizada dado que se puede establecer un rendimiento alto sin correr el riesgo del sobreajuste, aplicando los criterios de regularización (se verá si lasso o ridge es más efectivo) de modo que se penalice los coeficientes excesivamente grandes, como puede ocurrir con los equipos que suelen ganar en general. Sin embargo, al tratarse de un modelo lineal, es posible que no pueda interpretar de buena manera las interacciones más complejas (interacciones no lineales), como por ejemplo un equipo que tiende a perder de local en general gane siempre de local contra un equipo específico.
+
+El segundo modelo a aplicar se elige para la captura de patrones no lineales, 
+(como por ejemplo, que un equipo tiende a ganar más específicamente cuando juega de local o cuando juega de visita con cierto equipo), siendo esta la dificultad del modelo anterior. El problema de es que dicha información es menos interpretable (problema de la "caja negra").
+
+Se evaluará el uso de PCA es caso de que existan muchas variables que se correlacionen entre si.
 
 ## Análisis Exploratorio de Datos (EDA)
 La base cuenta con los datos de todos los partidos de la primera división de España desde el año 1993 hasta 2023, exponiendo resultados de victoria para el equipo local (H), victoria para el visitante (A) y empate (D).
