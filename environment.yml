@@ -1,0 +1,12 @@
+name: Entorno1
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy=2.2.6
+  - pandas=2.3.3
+  - matplotlib=3.10.8 
+  - seaborn=0.13.2
+  - scikit-learn=1.7.2
+  - pip=26.0.1
