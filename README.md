@@ -62,3 +62,47 @@ En esta primera etapa se realizó una exploración general de la base de datos d
 - El análisis de victorias locales puede mostrar qué enfrentamientos muestran mayor dominancia.
 
 Estos resultados sientan la base exploratoria para la siguiente etapa del proyecto, en la que se buscará construir un modelo predictivo de resultados.
+
+## Modelamiento
+
+### Clasificación Multiclase
+
+Para el caso anterior, se procederá a entrenar los modelos de Regresión Logística y Random Forest utilizando únicamente la identidad de los equipos (HomeTeam, AwayTeam, codificados con One-Hot-Encoding, que vuelve dichos datos a 0 y 1) como las variables predictoras, dando los siguientes resultados:
+> Resultados en el código > 
+
+Como se puede observar en los resultados obtenidos, los modelos cuentan con resultados similares en su acuraccy, siendo ligeramente superior la Regresión Logística. Por otro lado, el F1 macro de Random Forest es superior al de Regresión Logistica, lo que se demuestra en su leve mejoría en la clasificación de los empates.
+
+En ambos modelos se presenta una complejidad enorme en clasificar los empates, además de concentrarse la mayor parte de las predicciones (sesgo) hacia la victoria local (H).
+
+Dicha cuestión probablemente ocurra por lo visto previamente en el data set, el cual presenta un desbalance inclinado hacia las victorias del equipo. Por lo mismo, una manera de intentar mejorar los resultados del modelo predictivo es balancear el dataset combinando los resultados de empate y derrota, de forma que el modelo solo tenga que elegir entre dos opciones en vez de dos. Si bien es cierto que dicho cambio deshabilita la opción de clasificar un empate, es posible que el porcentaje de acierto generalizado del modelo mejore considerablemente.
+
+### Prueba con datos balanceados (multiclase a binaria)
+Dado lo expresado anteriormente, se decidió simplificar el problema de una clasificación multiclase a una binaria, fusionando los resultados de empate y derrota en una sola categoría (No victoria local), de forma que el modelo elige entre dos opciones en lugar de tres. El cambio de enfoque permitió los siguientes resultados:
+> Resultados en el código >
+
+Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, siendo ahora el mejor modelo. Esto ocurre debido a que, al tratarse ahora de solo dos variables, encuentra la linealidad de los resultados, y por ende, mejora considerablemente su capacidad de predicción. 
+
+### Nuevas Variables
+
+Sobre los resultados obtenidos previamente, se construyeron 4 variables nuevas a partir del historial que se muestra para cada equipo, las nuevas variables son las siguientes:
+- Racha_Puntos_Local / Racha_Puntos_Visita: Promedio de puntos obtenidos (victoria=3, empate=1, derrota=0) en los ultimos 5 partidos de cada equipo, sin importar si es que jugó de local o de visita.
+- Tasa_Victorias_Local / Tasa_Victorias_Visita: Porcentaje histórico de victorias de cada equipo, considerando todos sus partidos previos disponibles.
+
+Los valores nulos se imputaron con la media de cada variable para las rachas, y con 0.5 para las tasas de victoria.
+
+Con estas variables incorporadas, se reentrenaron ambos modelos, dando los siguientes resultados:
+> Resultados en el código >
+
+### Comentarios finales
+Al incorporar las nuevas variables, ambos modelos mejorar de forma consistente respecto a la versión anterior del modelo. Para el caso de evitar el sobreajuste, se calculó la diferencia del F1 macro tanto del train como del test, donde se observa una diferencia relativamente pequeña (datos en el código), lo que indica que el modelo no está memorizando los datos de entrenamiento (overfitting), sino que los generaliza correctamente.
+
+Al comparar los resultados de los modelos, la regresión logística presenta un mejor F1 macro en comparación al random forest, mientras que random forest presenta un mejor accuracy (aunque muy leve). Esto quiere decir que el random forest intenta maximizar los aciertos del modelo, y por tanto prioriza las "no victorias". En cambio, la regresión logística busca un balance entre los datos, y por ello penaliza el desequilibrio entre las clases.
+
+En resumen
+- El problema de clasificación multiclase original es más complicado de modelar que su versión binaria, dado que los modelos presentan problemas importantes en la predicción de los empates, que es posible que ocurran por la falta de datos en la base original, como también porque los equipos que suelen empatar están más "parejos" en rendimiento, cosa que es dificil de predecir en las condiciones actuales del los modelos.
+- Simplificar el modelo ayudó considerablemente a tener mejores desempeños en los modelos, a costa de perder la capacidad de predecir los empates, que tal como hemos comentado, presentaba dificultades para hacerlo.
+- Las variables introducidas ayudaron a mejorar nuevamente el desempeño de los modelos, encontrando una cualidad para cada uno de estos (random forest más preciso pero conservador; regresion logísitca más balanceado pero ligeramente menos preciso).
+  
+- El control del overfitting se ve realizado, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
+
+- Para terminar, sería importante la inclusión de nuevas variables o nuevos datos a la base de datos para aportar mas complejidad o especificidad, de forma que pueda mejorarse el desempeño de los modelos actuales, como también ver si es que el problema inicial (clasificación multiclase) es abordable.
