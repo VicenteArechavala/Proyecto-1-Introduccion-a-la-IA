@@ -102,7 +102,7 @@ Al comparar los resultados de los modelos, la regresión logística presenta un 
 - Simplificar el modelo ayudó considerablemente a tener mejores desempeños en los modelos, a costa de perder la capacidad de predecir los empates, que tal como hemos comentado, presentaba dificultades para hacerlo.
 - Las variables introducidas ayudaron a mejorar nuevamente el desempeño de los modelos, encontrando una cualidad para cada uno de estos (random forest más preciso pero conservador; regresion logísitca más balanceado pero ligeramente menos preciso).
   
-- El control del overfitting se ve correctamente corregido, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
+- El control del overfitting se ve correctamente implementado, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
 
 Para terminar, sería importante la inclusión de nuevas variables o nuevos datos a la base de datos para aportar mas complejidad o especificidad, de forma que pueda mejorarse el desempeño de los modelos actuales, como también ver si es que el problema inicial (clasificación multiclase) es abordable.
 
