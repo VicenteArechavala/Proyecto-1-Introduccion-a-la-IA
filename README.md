@@ -68,7 +68,7 @@ Estos resultados sientan la base exploratoria para la siguiente etapa del proyec
 ### Clasificación Multiclase
 
 Para el caso anterior, se procederá a entrenar los modelos de Regresión Logística y Random Forest utilizando únicamente la identidad de los equipos (HomeTeam, AwayTeam, codificados con One-Hot-Encoding, que vuelve dichos datos a 0 y 1) como las variables predictoras, dando los siguientes resultados:
-> Resultados en el código > 
+> Resultados en el código
 
 Como se puede observar en los resultados obtenidos, los modelos cuentan con resultados similares en su acuraccy, siendo ligeramente superior la Regresión Logística. Por otro lado, el F1 macro de Random Forest es superior al de Regresión Logistica, lo que se demuestra en su leve mejoría en la clasificación de los empates.
 
@@ -78,7 +78,7 @@ Dicha cuestión probablemente ocurra por lo visto previamente en el data set, el
 
 ### Prueba con datos balanceados (multiclase a binaria)
 Dado lo expresado anteriormente, se decidió simplificar el problema de una clasificación multiclase a una binaria, fusionando los resultados de empate y derrota en una sola categoría (No victoria local), de forma que el modelo elige entre dos opciones en lugar de tres. El cambio de enfoque permitió los siguientes resultados:
-> Resultados en el código >
+> Resultados en el código
 
 Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, siendo ahora el mejor modelo. Esto ocurre debido a que, al tratarse ahora de solo dos variables, encuentra la linealidad de los resultados, y por ende, mejora considerablemente su capacidad de predicción. 
 
@@ -91,7 +91,7 @@ Sobre los resultados obtenidos previamente, se construyeron 4 variables nuevas a
 Los valores nulos se imputaron con la media de cada variable para las rachas, y con 0.5 para las tasas de victoria.
 
 Con estas variables incorporadas, se reentrenaron ambos modelos, dando los siguientes resultados:
-> Resultados en el código >
+> Resultados en el código
 
 ### Comentarios finales
 Al incorporar las nuevas variables, ambos modelos mejorar de forma consistente respecto a la versión anterior del modelo. Para el caso de evitar el sobreajuste, se calculó la diferencia del F1 macro tanto del train como del test, donde se observa una diferencia relativamente pequeña (datos en el código), lo que indica que el modelo no está memorizando los datos de entrenamiento (overfitting), sino que los generaliza correctamente.
