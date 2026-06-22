@@ -14,7 +14,7 @@ La última variable descrita será utilizada como la variable objetivo.
 ## Plan de acción
 Para evaluar como se desempeña el modelo en la predicción, se hará una división temporal de los datos, de manera que el modelo utilice las temporadas pasadas como entrenamiento y intente predecir lo que ocurre en las temporadas más recientes. De esta forma, el modelo simula una interacción real, dado que la predicción se basará en la información que se tiene en el momento para predecir un resultado futuro.
 
-El problema observado es de clasificación multiclase (la variable objertivo cuenta con las opciones victoria, derrota, empate), además que dichas clases no están balanceadas (en general los equipos ganan mas de local). Por lo tanto, se implementará la lectura del accuracy, precision, recall, F1-score y matriz de confusion.
+El problema observado es de clasificación multiclase (la variable objetivo cuenta con las opciones victoria, derrota, empate), además que dichas clases no están balanceadas (en general los equipos ganan mas de local). Por lo tanto, se implementará la lectura del accuracy, precision, recall, F1-score y matriz de confusion.
 
 ## Justificación del modelo
 Como se comentó, existe un posible problema de overfitting, por lo qué se prevé el uso de regresión logística y random forest para la aplicación de este modelo. 
@@ -22,7 +22,7 @@ Como se comentó, existe un posible problema de overfitting, por lo qué se prev
 La primera será utilizada dado que se puede establecer un rendimiento alto sin correr el riesgo del sobreajuste, aplicando los criterios de regularización (se verá si lasso o ridge es más efectivo) de modo que se penalice los coeficientes excesivamente grandes, como puede ocurrir con los equipos que suelen ganar en general. Sin embargo, al tratarse de un modelo lineal, es posible que no pueda interpretar de buena manera las interacciones más complejas (interacciones no lineales), como por ejemplo un equipo que tiende a perder de local en general gane siempre de local contra un equipo específico.
 
 El segundo modelo a aplicar se elige para la captura de patrones no lineales, 
-(como por ejemplo, que un equipo tiende a ganar más específicamente cuando juega de local o cuando juega de visita con cierto equipo), siendo esta la dificultad del modelo anterior. El problema de es que dicha información es menos interpretable (problema de la "caja negra").
+(como por ejemplo, que un equipo tiende a ganar más específicamente cuando juega de local o cuando juega de visita con cierto equipo), siendo esta la dificultad del modelo anterior. El problema es que dicha información es menos interpretable (problema de la "caja negra").
 
 Se evaluará el uso de PCA es caso de que existan muchas variables que se correlacionen entre si.
 
@@ -80,7 +80,7 @@ Dicha cuestión probablemente ocurra por lo visto previamente en el data set, el
 Dado lo expresado anteriormente, se decidió simplificar el problema de una clasificación multiclase a una binaria, fusionando los resultados de empate y derrota en una sola categoría (No victoria local), de forma que el modelo elige entre dos opciones en lugar de tres. El cambio de enfoque permitió los siguientes resultados:
 > Resultados en el código
 
-Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, siendo ahora el mejor modelo. Esto ocurre debido a que, al tratarse ahora de solo dos variables, encuentra la linealidad de los resultados, y por ende, mejora considerablemente su capacidad de predicción. 
+Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, siendo ahora el mejor modelo. Esto ocurre porque, al reducir el problema a dos clases mejor balanceadas, ambos modelos logran capturar de mejor manera el patrón dominante de los datos (la ventaja de jugar de local), en comparación con la dificultad de distinguir tres resultados posibles, y por ende, mejoran considerablemente su capacidad de predicción. 
 
 ### Nuevas Variables
 
