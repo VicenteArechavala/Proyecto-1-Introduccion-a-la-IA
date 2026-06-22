@@ -70,17 +70,17 @@ Estos resultados sientan la base exploratoria para la siguiente etapa del proyec
 Para el caso anterior, se procederá a entrenar los modelos de Regresión Logística y Random Forest utilizando únicamente la identidad de los equipos (HomeTeam, AwayTeam, codificados con One-Hot-Encoding, que vuelve dichos datos a 0 y 1) como las variables predictoras, dando los siguientes resultados:
 > Resultados en el código
 
-Como se puede observar en los resultados obtenidos, los modelos cuentan con resultados similares en su acuraccy, siendo ligeramente superior la Regresión Logística. Por otro lado, el F1 macro de Random Forest es superior al de Regresión Logistica, lo que se demuestra en su leve mejoría en la clasificación de los empates.
+Como se puede observar en los resultados obtenidos, los modelos cuentan con resultados similares en su acuraccy (0.471 para random forest; 0.495 para regresión logística), siendo ligeramente superior la Regresión Logística. Por otro lado, el recall y f1-score de Random Forest en empates es superior al de Regresión Logistica (0.03 contra 0.15 en recall; 0.06 contra 0.20 de f1-score), lo que se demuestra en su leve mejoría en la clasificación de estos resultados.
 
-En ambos modelos se presenta una complejidad enorme en clasificar los empates, además de concentrarse la mayor parte de las predicciones (sesgo) hacia la victoria local (H).
+A pesar de lo dicho, en ambos modelos se presenta una complejidad enorme en clasificar los empates, además de concentrarse la mayor parte de las predicciones (sesgo) hacia la victoria local (H).
 
-Dicha cuestión probablemente ocurra por lo visto previamente en el data set, el cual presenta un desbalance inclinado hacia las victorias del equipo. Por lo mismo, una manera de intentar mejorar los resultados del modelo predictivo es balancear el dataset combinando los resultados de empate y derrota, de forma que el modelo solo tenga que elegir entre dos opciones en vez de dos. Si bien es cierto que dicho cambio deshabilita la opción de clasificar un empate, es posible que el porcentaje de acierto generalizado del modelo mejore considerablemente.
+Dicha cuestión probablemente ocurra por lo visto previamente en el data set, el cual presenta un desbalance inclinado hacia las victorias del equipo. Por lo mismo, una manera de intentar mejorar los resultados del modelo predictivo es balancear el dataset combinando los resultados de empate y derrota, de forma que el modelo solo tenga que elegir entre dos opciones en vez de dos. Si bien es cierto que dicho cambio deshabilita la opción de clasificar un empate, es posible que el porcentaje de acierto generalizado del modelo mejore considerablemente. 
 
 ### Prueba con datos balanceados (multiclase a binaria)
 Dado lo expresado anteriormente, se decidió simplificar el problema de una clasificación multiclase a una binaria, fusionando los resultados de empate y derrota en una sola categoría (No victoria local), de forma que el modelo elige entre dos opciones en lugar de tres. El cambio de enfoque permitió los siguientes resultados:
 > Resultados en el código
 
-Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, siendo ahora el mejor modelo. Esto ocurre porque, al reducir el problema a dos clases mejor balanceadas, ambos modelos logran capturar de mejor manera el patrón dominante de los datos (la ventaja de jugar de local), en comparación con la dificultad de distinguir tres resultados posibles, y por ende, mejoran considerablemente su capacidad de predicción. 
+Se observa que, luego de cambiar el problema de uno multiclase a uno binario, la precision de ambos modelos mejora bastante, pues pasa de un 0.471 a un 0.594 en Random Forest, y de un 0.495 a un 0.622 en Regresión Logística, que continua teniendo un mejor accuracy. Esto ocurre porque, al reducir el problema a dos clases mejor balanceadas, ambos modelos logran capturar de mejor manera el patrón dominante de los datos (la ventaja de jugar de local), en comparación con la dificultad de distinguir tres resultados posibles, y por ende, mejoran considerablemente su capacidad de predicción. 
 
 ### Nuevas Variables
 
