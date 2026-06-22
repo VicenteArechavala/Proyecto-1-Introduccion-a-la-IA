@@ -14,7 +14,7 @@ La última variable descrita será utilizada como la variable objetivo.
 ## Plan de acción
 Para evaluar como se desempeña el modelo en la predicción, se hará una división temporal de los datos, de manera que el modelo utilice las temporadas pasadas como entrenamiento y intente predecir lo que ocurre en las temporadas más recientes. De esta forma, el modelo simula una interacción real, dado que la predicción se basará en la información que se tiene en el momento para predecir un resultado futuro.
 
-El problema observado es de clasificación multiclase (la variable objetivo cuenta con las opciones victoria, derrota, empate), además que dichas clases no están balanceadas (en general los equipos ganan mas de local). Por lo tanto, se implementará la lectura del accuracy, precision, recall, F1-score y matriz de confusion.
+El problema observado es de clasificación multiclase (la variable objetivo cuenta con las opciones victoria, derrota, empate), además que dichas clases no están balanceadas (en general los equipos ganan mas de local). Por lo tanto, se implementará la lectura del accuracy, precision, recall, F1-macro y matriz de confusion.
 
 ## Justificación del modelo
 Como se comentó, existe un posible problema de overfitting, por lo qué se prevé el uso de regresión logística y random forest para la aplicación de este modelo. 
@@ -102,7 +102,7 @@ Al comparar los resultados de los modelos, la regresión logística presenta un 
 - Simplificar el modelo ayudó considerablemente a tener mejores desempeños en los modelos, a costa de perder la capacidad de predecir los empates, que tal como hemos comentado, presentaba dificultades para hacerlo.
 - Las variables introducidas ayudaron a mejorar nuevamente el desempeño de los modelos, encontrando una cualidad para cada uno de estos (random forest más preciso pero conservador; regresion logísitca más balanceado pero ligeramente menos preciso).
   
-- El control del overfitting se ve realizado, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
+- El control del overfitting se ve correctamente implementado, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
 
 Para terminar, sería importante la inclusión de nuevas variables o nuevos datos a la base de datos para aportar mas complejidad o especificidad, de forma que pueda mejorarse el desempeño de los modelos actuales, como también ver si es que el problema inicial (clasificación multiclase) es abordable.
 
