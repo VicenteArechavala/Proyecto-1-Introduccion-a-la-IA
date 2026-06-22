@@ -93,16 +93,16 @@ Los valores nulos se imputaron con la media de cada variable para las rachas, y 
 Con estas variables incorporadas, se reentrenaron ambos modelos, dando los siguientes resultados:
 > Resultados en el código
 
-### Comentarios finales
 Al incorporar las nuevas variables, ambos modelos mejorar de forma consistente respecto a la versión anterior del modelo. Para el caso de evitar el sobreajuste, se calculó la diferencia del F1 macro tanto del train como del test, donde se observa una diferencia relativamente pequeña (datos en el código), lo que indica que el modelo no está memorizando los datos de entrenamiento (overfitting), sino que los generaliza correctamente.
 
 Al comparar los resultados de los modelos, la regresión logística presenta un mejor F1 macro en comparación al random forest, mientras que random forest presenta un mejor accuracy (aunque muy leve). Esto quiere decir que el random forest intenta maximizar los aciertos del modelo, y por tanto prioriza las "no victorias". En cambio, la regresión logística busca un balance entre los datos, y por ello penaliza el desequilibrio entre las clases.
 
-En resumen
+### Comentarios finales
 - El problema de clasificación multiclase original es más complicado de modelar que su versión binaria, dado que los modelos presentan problemas importantes en la predicción de los empates, que es posible que ocurran por la falta de datos en la base original, como también porque los equipos que suelen empatar están más "parejos" en rendimiento, cosa que es dificil de predecir en las condiciones actuales del los modelos.
 - Simplificar el modelo ayudó considerablemente a tener mejores desempeños en los modelos, a costa de perder la capacidad de predecir los empates, que tal como hemos comentado, presentaba dificultades para hacerlo.
 - Las variables introducidas ayudaron a mejorar nuevamente el desempeño de los modelos, encontrando una cualidad para cada uno de estos (random forest más preciso pero conservador; regresion logísitca más balanceado pero ligeramente menos preciso).
   
 - El control del overfitting se ve realizado, dado a que las diferencias entre las métricas de entrenamiento y testeo son mínimas en los casos vistos.
 
-- Para terminar, sería importante la inclusión de nuevas variables o nuevos datos a la base de datos para aportar mas complejidad o especificidad, de forma que pueda mejorarse el desempeño de los modelos actuales, como también ver si es que el problema inicial (clasificación multiclase) es abordable.
+Para terminar, sería importante la inclusión de nuevas variables o nuevos datos a la base de datos para aportar mas complejidad o especificidad, de forma que pueda mejorarse el desempeño de los modelos actuales, como también ver si es que el problema inicial (clasificación multiclase) es abordable.
+
